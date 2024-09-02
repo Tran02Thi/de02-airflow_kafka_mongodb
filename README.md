@@ -1,4 +1,4 @@
-![Alt text](./de03-pipeline.svg)
+![Alt text](https://svgshare.com/i/19wU.svg)
 
 <h1 align="center">ELT Pipeline with Airflow, Kafka and MongoDB </h1>
 
