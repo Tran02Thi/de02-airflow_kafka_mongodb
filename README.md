@@ -58,57 +58,104 @@ A free, open-source API for generating random user data. Like Lorem Ipsum, but f
   > 
   > Link website: https://randomuser.me/
 
-
-
-## Architecture
-
-
 ## Usage
+Download / pull the repo to your desired location.
+
+Start the installation with:
+
+    docker-compose up -d
+
+This command will pull and create Docker images and containers for Airflow, Kafka, MongoDB according to the instructions in the docker-compose.yml file:
+
+
+After everything has been installed, you can check the status of your containers (if they are healthy) with:
+
+    docker ps
+
+Note: it might take up to 30 seconds for the containers to have the healthy flag after starting.
 
 <p align="center">
   <a>
-    <img src="https://imagizer.imageshack.com/img924/7605/S12yu5.png"> 
+    <img src="https://imagizer.imageshack.com/img923/1527/robTAM.png"> 
   </a>
 </p>
+
+### Airflow Interface
+You can now access the Airflow web interface by going to http://localhost:8080/. If you have not changed them in the docker-compose.yml file, the default user is **airflow** and password is **airflow**:
 
 <p align="center">
-  <a>
-    <img src="https://i.ibb.co/nfL71vx/Dags.png"> 
-  </a>
+  <img src=https://user-images.githubusercontent.com/19210522/114421290-d5060d80-9bbd-11eb-842e-13a244996200.png>
 </p>
 
+After signing in, the Airflow home page is the DAGs list page. Here you will see all your DAGs and the Airflow example DAGs, sorted alphabetically. 
+
+Any DAG python script saved in the directory [**dags/**](https://github.com/Tran02Thi/de02-airflow_kafka_mongodb/tree/main/airflow-data/dags), will show up on the DAGs page (e.g. the first DAG, `random_people_names`, is the one built for this project).
 
 <p align="center">
-  <a>
-    <img src="https://i.ibb.co/TvgYbW6/Dag-consumer.png"> 
-  </a>
+  <img src=https://imagizer.imageshack.com/img924/9761/ScSW1G.png>
 </p>
 
+And with dags:
 
 <p align="center">
-  <a>
-    <img src="https://i.ibb.co/C1QFfGh/Dag-procuder.png"> 
-  </a>
+  <img src=https://imagizer.imageshack.com/img922/5092/7ROXPw.png>
 </p>
 
-
-<p align="center">
-  <a>
-    <img src="https://i.ibb.co/3hYBkd2/consumer-running.png"> 
-  </a>
-</p>
+<br>
 
 <p align="center">
-  <a>
-    <img src="https://i.ibb.co/NFYNVZH/Dag-procuder-2.png"> 
-  </a>
+  <img src=https://imagizer.imageshack.com/img924/5214/VRi2wg.png>
 </p>
 
+
+### Kafka Interface
+You can now access the Kafdrop web interface by going to http://localhost:9123/. You can see UI the following:
+
 <p align="center">
-  <a>
-    <img src="https://i.ibb.co/F4cHqVc/procuder-running.png"> 
-  </a>
+  <img src=https://imagizer.imageshack.com/img922/4268/I15n7b.png>
 </p>
+
+
+And now you can create topic with name is **random_users** and 4 partition
+<p align="center">
+  <img src="https://imagizer.imageshack.com/img924/4694/QajhsX.png"> 
+</p>
+
+<br>
+
+<p align="center">
+  <img src="https://imagizer.imageshack.com/img924/7605/S12yu5.png"> 
+</p>
+
+
+### MongoDB
+
+If you want to use mongoDB of your, you will have to enter the mongoDB connection string (or environment variable or file with the string) in the .env file:
+    
+    # MongoDB 
+    MONGO_INITDB_ROOT_USERNAME=${USER}
+    MONGO_INITDB_ROOT_PASSWORD=${PASSWORD}
+
+First you need to run dag **random_people_names** to send messages to kafka continuously every 10 minutes.
+
+<p align="center">
+  <img src="https://imagizer.imageshack.com/img924/3647/AvIzW1.png"> 
+</p>
+
+Next you will run dag **consumer_users** to get data in the partition and send it to MongoDB with database as users and collection as 4 predetermined countries (you can view and change arbitrarily in the source code).
+
+<p align="center">
+  <img src="https://imagizer.imageshack.com/img923/1346/UaVomY.png"> 
+</p>
+
+<br>
+We will use Kafdrop to check healthy the streaming
+<br> </br>
+<p align="center">
+  <img src="https://imagizer.imageshack.com/img924/5829/9EyhaA.png"> 
+</p>
+
+The data will then be continuously written to mongoDB ::))
 
 
 ## Storage
