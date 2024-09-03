@@ -161,6 +161,6 @@ The data will then be continuously written to mongoDB ::))
 ## Storage
 <p align="center">
   <a>
-    <img src="https://i.ibb.co/CbXjCVP/Mongodb-2.png"> 
+    <img src="https://imagizer.imageshack.com/img924/6894/MiMndF.png"> 
   </a>
 </p>
