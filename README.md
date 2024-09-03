@@ -46,7 +46,7 @@
 
 <p align="center">
   <a>
-    <img src="https://ibb.co/jbmtR6f"> 
+    <img src="https://imagizer.imageshack.com/img924/3647/AvIzW1.png"> 
   </a>
 </p>
 
